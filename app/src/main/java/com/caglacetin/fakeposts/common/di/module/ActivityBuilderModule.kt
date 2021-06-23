@@ -1,6 +1,6 @@
 package com.caglacetin.fakeposts.common.di.module
 
-import com.caglacetin.fakeposts.MainActivity
+import com.caglacetin.fakeposts.PostListActivity
 import com.caglacetin.fakeposts.common.di.scope.ActivityScope
 import com.caglacetin.fakeposts.ui.MainActivityModule
 
@@ -12,5 +12,5 @@ interface ActivityBuilderModule {
 
     @ActivityScope
     @get:ContributesAndroidInjector(modules = [MainActivityModule::class])
-    val mainActivity: MainActivity
+    val mainActivity: PostListActivity
 }
