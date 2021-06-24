@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_16"
             android:text="@{viewState.postBody}"
+            android:maxLength="120"
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold"
             tools:text="@tools:sample/lorem"
