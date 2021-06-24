@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.caglacetin.fakeposts.common.di.ViewModelFactory
 import com.caglacetin.fakeposts.common.di.key.ViewModelKey
-import com.caglacetin.fakeposts.ui.PostListViewModel
+import com.caglacetin.fakeposts.ui.postlist.PostListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

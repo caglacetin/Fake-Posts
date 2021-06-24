@@ -1,17 +1,14 @@
-package com.caglacetin.fakeposts
+package com.caglacetin.fakeposts.ui.postlist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.caglacetin.fakeposts.R.layout
 import com.caglacetin.fakeposts.common.observeNonNull
 import com.caglacetin.fakeposts.common.runIfNull
 import com.caglacetin.fakeposts.databinding.ActivityPostListBinding
-import com.caglacetin.fakeposts.ui.PostItem
-import com.caglacetin.fakeposts.ui.PostListAdapter
-import com.caglacetin.fakeposts.ui.PostListViewModel
-import com.caglacetin.fakeposts.ui.PostListViewState
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -29,7 +26,7 @@ class PostListActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.setContentView(this, R.layout.activity_post_list)
+    binding = DataBindingUtil.setContentView(this, layout.activity_post_list)
 
     postListViewModel = ViewModelProvider(this, viewModelProviderFactory)
       .get(PostListViewModel::class.java)

@@ -1,4 +1,4 @@
-package com.caglacetin.fakeposts.ui
+package com.caglacetin.fakeposts.ui.postlist
 
 import com.caglacetin.fakeposts.common.Status
 

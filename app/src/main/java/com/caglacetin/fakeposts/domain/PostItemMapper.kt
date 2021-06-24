@@ -2,7 +2,7 @@ package com.caglacetin.fakeposts.domain
 
 import com.caglacetin.fakeposts.common.Mapper
 import com.caglacetin.fakeposts.data.response.PostResponse
-import com.caglacetin.fakeposts.ui.PostItem
+import com.caglacetin.fakeposts.ui.postlist.PostItem
 import javax.inject.Inject
 
 class PostItemMapper @Inject constructor(): Mapper<List<PostResponse>, List<PostItem>> {

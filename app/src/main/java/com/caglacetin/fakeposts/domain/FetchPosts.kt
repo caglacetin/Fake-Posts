@@ -3,7 +3,7 @@ package com.caglacetin.fakeposts.domain
 import com.caglacetin.fakeposts.common.Resource
 import com.caglacetin.fakeposts.common.map
 import com.caglacetin.fakeposts.data.FakePostsRepository
-import com.caglacetin.fakeposts.ui.PostItem
+import com.caglacetin.fakeposts.ui.postlist.PostItem
 import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 

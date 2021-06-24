@@ -1,10 +1,12 @@
-package com.caglacetin.fakeposts.ui
+package com.caglacetin.fakeposts.ui.postlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.caglacetin.fakeposts.common.ReactiveViewModel
 import com.caglacetin.fakeposts.common.Resource
-import com.caglacetin.fakeposts.common.Status
+import com.caglacetin.fakeposts.common.Status.Content
+import com.caglacetin.fakeposts.common.Status.Error
+import com.caglacetin.fakeposts.common.Status.Loading
 import com.caglacetin.fakeposts.common.doOnSuccess
 import com.caglacetin.fakeposts.common.plusAssign
 import com.caglacetin.fakeposts.domain.FetchPosts
@@ -23,7 +25,6 @@ class PostListViewModel @Inject constructor(
   fun fetchPosts() {
     useCase
       .fetchPosts()
-      .observeOn(AndroidSchedulers.mainThread())
       .doOnSuccess { list ->
         onRecipeListContentResultReady(list)
       }
@@ -36,9 +37,9 @@ class PostListViewModel @Inject constructor(
   private fun onRecipeListStatusResultReady(resource: Resource<List<PostItem>>) {
 
     val viewState = when (resource) {
-      is Resource.Success -> PostListViewState(Status.Content)
-      is Resource.Error -> PostListViewState(Status.Error(resource.exception))
-      Resource.Loading -> PostListViewState(Status.Loading)
+      is Resource.Success -> PostListViewState(Content)
+      is Resource.Error -> PostListViewState(Error(resource.exception))
+      Resource.Loading -> PostListViewState(Loading)
     }
     _status.value = viewState
   }
