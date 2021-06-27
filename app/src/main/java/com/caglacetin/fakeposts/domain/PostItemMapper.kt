@@ -7,11 +7,11 @@ import javax.inject.Inject
 
 class PostItemMapper @Inject constructor(): Mapper<PostResponse, PostDetailItem> {
 
-  override fun mapFrom(post: PostResponse): PostDetailItem {
+  override fun mapFrom(type: PostResponse): PostDetailItem {
     return PostDetailItem(
-      userId = post.userId,
-      title = post.title,
-      body = post.body,
+      userId = type.userId,
+      title = type.title,
+      body = type.body,
     )
   }
 }

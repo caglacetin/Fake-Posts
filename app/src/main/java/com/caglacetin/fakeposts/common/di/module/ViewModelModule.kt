@@ -11,18 +11,18 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-interface ViewModelModule {
+abstract class ViewModelModule {
 
-    @get:IntoMap
-    @get:Binds
-    @get:ViewModelKey(PostListViewModel::class)
-    val PostListViewModel.allPostsViewModel: ViewModel
+    @Binds
+    internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
-    @get:IntoMap
-    @get:Binds
-    @get:ViewModelKey(PostDetailViewModel::class)
-    val PostDetailViewModel.aPostViewModel: ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(PostListViewModel::class)
+    internal abstract fun bindPostListViewModel(viewModel: PostListViewModel): ViewModel
 
-    @get:Binds
-    val ViewModelFactory.viewModelFactory: ViewModelProvider.Factory
+    @Binds
+    @IntoMap
+    @ViewModelKey(PostDetailViewModel::class)
+    internal abstract fun bindPostDetailViewModel(viewModel: PostDetailViewModel): ViewModel
 }
