@@ -11,6 +11,7 @@ import javax.inject.Inject
 class PostListAdapter @Inject constructor() : RecyclerView.Adapter<PostItemViewHolder>() {
 
   private val postList: MutableList<PostItem> = mutableListOf()
+  var itemClicked: ((id: Int) -> Unit)? = null
 
   fun setPosts(posts: List<PostItem>) {
     postList.addAll(posts)
@@ -41,6 +42,9 @@ class PostListAdapter @Inject constructor() : RecyclerView.Adapter<PostItemViewH
       with(binding) {
         viewState = PostItemViewState(postItem)
         executePendingBindings()
+        itemView.setOnClickListener {
+          itemClicked?.invoke(postItem.id)
+        }
       }
     }
   }

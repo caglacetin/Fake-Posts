@@ -3,16 +3,17 @@ package com.caglacetin.fakeposts.domain
 import com.caglacetin.fakeposts.common.Resource
 import com.caglacetin.fakeposts.common.map
 import com.caglacetin.fakeposts.data.FakePostsRepository
+import com.caglacetin.fakeposts.ui.postdetail.UserItem
 import com.caglacetin.fakeposts.ui.postlist.PostItem
 import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
-class FetchPosts @Inject constructor(
+class GetAUser @Inject constructor(
   private val repository: FakePostsRepository,
-  private val mapper: PostListMapper
+  private val mapper: UserItemMapper
 ) {
-  fun fetchPosts(): Observable<Resource<List<PostItem>>> =
-    repository.fetchPosts()
+  fun getAUser(userId: Int): Observable<Resource<UserItem>> =
+    repository.getAUser(userId)
       .map { resource ->
         resource.map { response ->
           mapper.mapFrom(response)

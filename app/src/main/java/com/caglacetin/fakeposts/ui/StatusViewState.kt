@@ -1,8 +1,8 @@
-package com.caglacetin.fakeposts.ui.postlist
+package com.caglacetin.fakeposts.ui
 
 import com.caglacetin.fakeposts.common.Status
 
-data class PostListViewState(
+data class StatusViewState(
   val status: Status
 ) {
   fun isLoading() = status is Status.Loading

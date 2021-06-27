@@ -5,16 +5,48 @@
     >
   <data>
     <variable
-        name="viewState"
+        name="postViewState"
         type="com.caglacetin.fakeposts.ui.postdetail.PostDetailViewState"
         />
-
+    <variable
+        name="userViewState"
+        type="com.caglacetin.fakeposts.ui.postdetail.UserItemViewState"
+        />
+    <variable
+        name="viewState"
+        type="com.caglacetin.fakeposts.ui.StatusViewState"
+        />
   </data>
+
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:padding="@dimen/dp_16"
       >
+    <TextView
+        tools:text="@tools:sample/lorem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        tools:visibility="visible"
+        android:padding="@dimen/dp_16"
+        android:text="@{viewState.errorMessage}"
+        app:visibleIf="@{viewState.shouldShowErrorMessage}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:visibleIf="@{viewState.isLoading}"
+        tools:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title_post_detail"
@@ -23,7 +55,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="@{viewState.postTitle}"
+        android:text="@{postViewState.postTitle}"
         android:textColor="@android:color/holo_purple"
         android:textStyle="bold"
         android:textSize="16sp"
@@ -39,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_post_detail"
         android:layout_marginTop="@dimen/dp_16"
-        android:text="@{viewState.postBody}"
+        android:text="@{postViewState.postBody}"
         android:maxLength="120"
         android:textColor="@android:color/darker_gray"
         android:textStyle="bold"
@@ -55,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_body_post_detail"
         android:layout_marginTop="@dimen/dp_16"
-        android:text="@{viewState.name}"
+        android:text="@{userViewState.name}"
         android:maxLength="120"
         android:textColor="@android:color/darker_gray"
         android:textStyle="bold"
@@ -70,7 +102,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name_post_detail"
         android:layout_marginTop="@dimen/dp_16"
-        android:text="@{viewState.username}"
+        android:text="@{userViewState.username}"
         android:maxLength="120"
         android:textColor="@android:color/darker_gray"
         android:textStyle="bold"

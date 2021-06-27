@@ -19,14 +19,19 @@ class FakePostsRepository @Inject constructor(
         Resource.Error(throwable)
       }.observeOn(AndroidSchedulers.mainThread())
 
-  fun getPostDetail(postId: Int): Observable<PostResponse> =
+  fun getPostDetail(postId: Int): Observable<Resource<PostResponse>> =
     service.getPostDetail(postId)
-      .map {
-       it
+      .map<Resource<PostResponse>> {
+        Resource.Success(it)
+      }.onErrorReturn { throwable ->
+        Resource.Error(throwable)
       }.observeOn(AndroidSchedulers.mainThread())
 
-  fun getAUser(userId: Int): Observable<UserResponse> =
-    service.getAUser(userId).map {
-      it
-    }.observeOn(AndroidSchedulers.mainThread())
+  fun getAUser(userId: Int): Observable<Resource<UserResponse>> =
+    service.getAUser(userId)
+      .map<Resource<UserResponse>> {
+        Resource.Success(it)
+      }.onErrorReturn { throwable ->
+        Resource.Error(throwable)
+      }.observeOn(AndroidSchedulers.mainThread())
 }

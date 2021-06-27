@@ -2,17 +2,16 @@ package com.caglacetin.fakeposts.domain
 
 import com.caglacetin.fakeposts.common.Mapper
 import com.caglacetin.fakeposts.data.response.PostResponse
-import com.caglacetin.fakeposts.ui.postlist.PostItem
+import com.caglacetin.fakeposts.ui.postdetail.PostDetailItem
 import javax.inject.Inject
 
-class PostItemMapper @Inject constructor(): Mapper<List<PostResponse>, List<PostItem>> {
+class PostItemMapper @Inject constructor(): Mapper<PostResponse, PostDetailItem> {
 
-  override fun mapFrom(type: List<PostResponse>): List<PostItem> {
-    return type.map { post ->
-      PostItem(
-        title = post.title,
-        body = post.body,
-      )
-    }
+  override fun mapFrom(post: PostResponse): PostDetailItem {
+    return PostDetailItem(
+      userId = post.userId,
+      title = post.title,
+      body = post.body,
+    )
   }
 }

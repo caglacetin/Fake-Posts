@@ -10,7 +10,7 @@ import com.caglacetin.fakeposts.common.Status.Loading
 import com.caglacetin.fakeposts.common.doOnSuccess
 import com.caglacetin.fakeposts.common.plusAssign
 import com.caglacetin.fakeposts.domain.FetchPosts
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import com.caglacetin.fakeposts.ui.StatusViewState
 import javax.inject.Inject
 
 class PostListViewModel @Inject constructor(
@@ -19,33 +19,27 @@ class PostListViewModel @Inject constructor(
 
   private val _contents = MutableLiveData<List<PostItem>>()
   val contents: LiveData<List<PostItem>> = _contents
-  private val _status = MutableLiveData<PostListViewState>()
-  val status: LiveData<PostListViewState> = _status
+  private val _status = MutableLiveData<StatusViewState>()
+  val status: LiveData<StatusViewState> = _status
 
   fun fetchPosts() {
     useCase
       .fetchPosts()
       .doOnSuccess { list ->
-        onRecipeListContentResultReady(list)
+        _contents.value = list
       }
       .subscribe { resource ->
-        onRecipeListStatusResultReady(resource)
+        setPostListStatus(resource)
       }
       .also { disposable += it }
   }
 
-  private fun onRecipeListStatusResultReady(resource: Resource<List<PostItem>>) {
-
+  private fun setPostListStatus(resource: Resource<List<PostItem>>) {
     val viewState = when (resource) {
-      is Resource.Success -> PostListViewState(Content)
-      is Resource.Error -> PostListViewState(Error(resource.exception))
-      Resource.Loading -> PostListViewState(Loading)
+      is Resource.Success -> StatusViewState(Content)
+      is Resource.Error -> StatusViewState(Error(resource.exception))
+      Resource.Loading -> StatusViewState(Loading)
     }
     _status.value = viewState
   }
-
-  private fun onRecipeListContentResultReady(results: List<PostItem>) {
-    _contents.value = results
-  }
-
 }
